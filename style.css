@@ -71,7 +71,8 @@ button {
 #noBtn {
   background: linear-gradient(135deg, #ff1744, #ff616f);
   color: white;
-position: relative;   
+  position: relative;
+  z-index: 10;   /* ✅ ADD THIS */
 }
 
 /* 💻 DESKTOP FIX */
