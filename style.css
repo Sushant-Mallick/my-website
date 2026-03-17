@@ -36,11 +36,13 @@ body {
 }
 
 .buttons {
-  margin-top: 40px;
+  margin-top: 30px;
   display: flex;
-  flex-direction: column;  /* ✅ MOBILE STACK */
-  gap: 15px;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;   /* ✅ keeps buttons in one line */
 }
 
 /* COMMON BUTTON STYLE */
@@ -85,5 +87,22 @@ button {
 
   #mainImg {
     width: 200px;
+  }
+}
+
+
+/* 📱 MOBILE FIX */
+@media (max-width: 480px) {
+  button {
+    padding: 10px 14px;   /* smaller buttons */
+    font-size: 14px;
+  }
+
+  #mainImg {
+    width: 140px;
+  }
+
+  #questionText {
+    font-size: 20px;
   }
 }
