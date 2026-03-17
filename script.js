@@ -64,13 +64,12 @@ if (index === texts.length) {
 // Function to move NO button randomly
 const moveNoBtn = () => {
   const padding = 20;
-  const safeTop = 150;   // ✅ prevents overlapping text & image
 
   const maxX = window.innerWidth - noBtn.offsetWidth - padding;
   const maxY = window.innerHeight - noBtn.offsetHeight - padding;
 
   const x = Math.random() * maxX;
-  const y = safeTop + Math.random() * (maxY - safeTop);
+  const y = Math.random() * maxY;
 
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
@@ -85,6 +84,11 @@ noBtn.addEventListener("mouseenter", () => {
 // Move NO button on touch (mobile)
 noBtn.addEventListener("touchstart", (e) => {
   if (!promptsFinished) return;
-  moveNoBtn();
-  e.preventDefault();
+
+  e.preventDefault();   // stop default tap
+
+  setTimeout(() => {
+    moveNoBtn();        // move after slight delay
+  }, 100);
+
 }, { passive: false });
