@@ -6,32 +6,32 @@ const text = document.getElementById("questionText");
 const texts = [
   "Are you sure? 😢", 
   "Think again… 🥺",
-  "My heart is breaking 💔",
+ // "My heart is breaking 💔",
   "Last chance 😭",
-  "Wait… that felt personal 😅",
-  "Are you playing hard to get? 😏",
-  "I saw that smile just now 😄",
-  "Love is knocking… open the door ❤️",
-  "My feelings are buffering… ⏳💔",
-  "Be honest… your heart says YES 😌",
+ // "Wait… that felt personal 😅",
+ // "Are you playing hard to get? 😏",
+ // "I saw that smile just now 😄",
+ // "Love is knocking… open the door ❤️",
+ // "My feelings are buffering… ⏳💔",
+ // "Be honest… your heart says YES 😌",
   "Please Think again.. 😳",
-  "One YES can change everything ✨",
+ // "One YES can change everything ✨",
   "This NO button is getting tired 😜",
 ];
 
 const images = [
   "image/No7.gif",
   "image/No9.gif",
-  "image/Nooooo.gif",
+ // "image/Nooooo.gif",
   "image/No12.gif",
-  "image/noo.gif",
-  "image/No11.gif",
-  "image/No8.gif",
-  "image/No13.gif",
-  "image/noo.gif",
-  "image/Nooooo.gif",
+  //"image/noo.gif",
+ // "image/No11.gif",
+  //"image/No8.gif",
+ // "image/No13.gif",
+ // "image/noo.gif",
+ // "image/Nooooo.gif",
   "image/nooo.gif",
-  "image/No12.gif",
+ // "image/No12.gif",
   "image/Nolast.gif"
 ];
 
@@ -50,18 +50,28 @@ noBtn.addEventListener("click", () => {
     img.src = images[index];
     index++;
 
-    if (index === texts.length) {
-      promptsFinished = true;
-      // Make NO moveable only after last prompt
-      noBtn.style.position = "absolute";
-    }
+if (index === texts.length) {
+  promptsFinished = true;
+
+  // move NO button out of button row
+  noBtn.style.position = "absolute";
+  noBtn.style.top = "60%";
+  noBtn.style.left = "50%";
+}
   }
 });
 
 // Function to move NO button randomly
 const moveNoBtn = () => {
-  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+  const padding = 20;
+  const safeTop = 150;   // ✅ prevents overlapping text & image
+
+  const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+  const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+
+  const x = Math.random() * maxX;
+  const y = safeTop + Math.random() * (maxY - safeTop);
+
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
 };
@@ -76,5 +86,5 @@ noBtn.addEventListener("mouseenter", () => {
 noBtn.addEventListener("touchstart", (e) => {
   if (!promptsFinished) return;
   moveNoBtn();
-  e.preventDefault(); // prevent button from being "selected" on mobile
-});
+  e.preventDefault();
+}, { passive: false });
